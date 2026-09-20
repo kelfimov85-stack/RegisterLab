@@ -30,3 +30,12 @@ C:\Users\student\Desktop\RegRoma\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.
 C:\Users\student\Desktop\RegRoma\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.InMemory.dll
 C:\Users\student\Desktop\RegRoma\obj\Debug\net9.0\RegRoma.csproj.AssemblyReference.cache
 C:\Users\student\Desktop\RegRoma\obj\Debug\net9.0\RegRoma.csproj.Up2Date
+C:\Users\student\Desktop\RegRoma\obj\Debug\net9.0\RegRoma.sourcelink.json
+C:\Users\student\Desktop\RegRoma\bin\Debug\net9.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\student\Desktop\RegRoma\bin\Debug\net9.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\student\Desktop\RegRoma\bin\Debug\net9.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\student\Desktop\RegRoma\bin\Debug\net9.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\student\Desktop\RegRoma\bin\Debug\net9.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\student\Desktop\RegRoma\bin\Debug\net9.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\student\Desktop\RegRoma\bin\Debug\net9.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\student\Desktop\RegRoma\bin\Debug\net9.0\System.IdentityModel.Tokens.Jwt.dll

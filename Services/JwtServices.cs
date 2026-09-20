@@ -3,6 +3,8 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using RegRoma.Models;
 using Microsoft.Extensions.Options;
+using System.Text;
+using System.Data;
 
 namespace RegRoma.Services;
 
@@ -10,7 +12,7 @@ public class JwtServices
 {
   private readonly IConfiguration _configuration;
 
-  public JwtService(IConfiguration configuration)
+  public JwtServices(IConfiguration configuration)
   {
     _configuration=configuration;
   }
@@ -28,5 +30,21 @@ public class JwtServices
      new Claim(ClaimTypes.Email, user.Email),
      new Claim(ClaimTypes.Role, user.Role) 
    };
+
+
+   var credentials = new SigningCredentials(
+    new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key)),
+    SecurityAlgorithms.HmacSha256
+   );
+
+   var token = new JwtSecurityToken(
+    issuer: issuer,
+    audience: audience,
+    claims:claims,
+    expires: DateTime.UtcNow.AddMinutes(expiresMinutes),
+    signingCredentials: credentials
+   );
+
+   return new JwtSecurityTokenHandler().WriteToken(token);
   }
 }

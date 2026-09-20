@@ -1,16 +1,47 @@
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using RegRoma.Data;
+using RegRoma.Services;
+
 var builder = WebApplication.CreateBuilder(args);
-
-
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
+builder.Services.AddControllers();
+
+builder.Services.AddControllers();
+
+builder.Services.AddDbContext<AppDbContext>(options =>
 {
-    app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
-}
+    options.UseInMemoryDatabase("AppDb");
+});
+builder.Services.AddScoped<PasswordServices>();
+builder.Services.AddScoped<JwtServices>();
+
+var jwtKey = builder.Configuration["JwtKey"];
+var keyBytes = Encoding.UTF8.GetBytes(jwtKey);
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(options =>
+{
+   options.TokenValidationParameters = new TokenValidationParameters
+   {
+       ValidateIssuer = true, //надо проверить
+       ValidateAudience = true,
+       ValidateIssuerSigningKey = true,
+       ValidateLifetime = true,
+       ValidIssuer = builder.Configuration["Jwt:Issuer"], //что проверить
+       ValidAudience = builder.Configuration["Jwt:Audience"],
+       IssuerSigningKey = new SymmetricSecurityKey(keyBytes)//проверка самого токена
+   };
+});
+
+app.UseAuthentication();
 
 app.UseHttpsRedirection();
 app.UseRouting();
