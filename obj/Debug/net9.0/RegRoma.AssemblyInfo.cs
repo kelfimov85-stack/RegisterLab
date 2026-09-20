@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("RegRoma")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2e153aea61ac1463102cd39222f17a205217058b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fd97b1e6a3e65631293a9de9bef66adad91f5346")]
 [assembly: System.Reflection.AssemblyProductAttribute("RegRoma")]
 [assembly: System.Reflection.AssemblyTitleAttribute("RegRoma")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

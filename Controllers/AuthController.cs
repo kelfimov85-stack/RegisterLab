@@ -1,4 +1,5 @@
 using System.Runtime.CompilerServices;
+using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
@@ -48,6 +49,9 @@ public class AuthController : ControllerBase
     return Ok("пользователь создан");
   }
   //login
+
+  [HttpPost("login")]
+  [AllowAnonymous]
   public async Task<ActionResult<AuthReq>> Login(LoginRequest request)
   {
     var user = await _db.Users.FirstOrDefaultAsync(user => user.Email == request.Email);
@@ -71,5 +75,32 @@ public class AuthController : ControllerBase
       Token = token,
       Email = user.Email
     });
-  } 
+  }
+  //me
+  [HttpGet("me")]
+  [Authorize]
+  public async Task<IActionResult> Me()
+  {
+    var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+    if (!int.TryParse(userId, out var id))
+    {
+      return Unauthorized();
+    }
+
+    var user = await _db.Users.FindAsync(id);
+
+    if (user == null)
+    {
+      return Unauthorized();
+    }
+
+    return Ok(new
+    {
+      user.Id,
+      user.Email,
+      user.Role,
+      user.CreatedAt
+    });
+  }
 }

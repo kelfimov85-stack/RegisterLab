@@ -7,11 +7,8 @@ using RegRoma.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var app = builder.Build();
-
 builder.Services.AddControllers();
 
-builder.Services.AddControllers();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
@@ -20,7 +17,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddScoped<PasswordServices>();
 builder.Services.AddScoped<JwtServices>();
 
-var jwtKey = builder.Configuration["JwtKey"];
+var jwtKey = builder.Configuration["Jwt:Key"]!;
 var keyBytes = Encoding.UTF8.GetBytes(jwtKey);
 
 builder.Services.AddAuthentication(options =>
@@ -40,6 +37,7 @@ builder.Services.AddAuthentication(options =>
        IssuerSigningKey = new SymmetricSecurityKey(keyBytes)//проверка самого токена
    };
 });
+var app = builder.Build();
 
 app.UseAuthentication();
 
